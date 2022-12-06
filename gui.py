@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 
+import area, perimeter
+
 class GUI:
     def __init__(self, window):
-
 
         self.window = window
         notebook = ttk.Notebook(window)
@@ -39,8 +40,8 @@ class GUI:
         self.frameCRad.pack(anchor='w', pady=10)
 
         self.frameCRes = Frame(cirTab)
-        self.buttonCRes = Button(self.frameCRes, text='Compute') #command=self.cir
-        self.labelCRes = Label(self.frameCRes, text='Area')
+        self.buttonCRes = Button(self.frameCRes, text='Compute', command=self.compute(1))
+        self.labelCRes = Label(self.frameCRes)
         self.buttonCRes.pack(padx=45, side='left')
         self.labelCRes.pack(padx=30, side='left')
         self.frameCRes.pack(anchor='w', pady=10)
@@ -62,8 +63,8 @@ class GUI:
         self.frameCRad2.pack(anchor='w', pady=10)
 
         self.frameCRes2 = Frame(cirTab)
-        self.buttonCRes2 = Button(self.frameCRes2, text='Compute')  # command=self.cir
-        self.labelCRes2 = Label(self.frameCRes2, text='Area')
+        self.buttonCRes2 = Button(self.frameCRes2, text='Compute', command=self.compute(2))
+        self.labelCRes2 = Label(self.frameCRes2)
         self.buttonCRes2.pack(padx=45, side='left')
         self.labelCRes2.pack(padx=30, side='left')
         self.frameCRes2.pack(anchor='w', pady=10)
@@ -85,8 +86,8 @@ class GUI:
         self.frameRSides.pack(anchor='w', pady=10)
 
         self.frameRRes = Frame(recTab)
-        self.buttonRRes = Button(self.frameRRes, text='Compute')  # command=self.cir
-        self.labelRRes = Label(self.frameRRes, text='Area')
+        self.buttonRRes = Button(self.frameRRes, text='Compute', command=self.compute(3))
+        self.labelRRes = Label(self.frameRRes)
         self.buttonRRes.pack(padx=45, side='left')
         self.labelRRes.pack(padx=30, side='left')
         self.frameRRes.pack(anchor='w', pady=10)
@@ -112,8 +113,8 @@ class GUI:
         self.frameSpace8.pack(anchor='w', pady=10)
 
         self.frameRRes2 = Frame(recTab)
-        self.buttonRRes2 = Button(self.frameRRes2, text='Compute')  # command=self.cir
-        self.labelRRes2 = Label(self.frameRRes2, text='Area')
+        self.buttonRRes2 = Button(self.frameRRes2, text='Compute', command=self.compute(4))
+        self.labelRRes2 = Label(self.frameRRes2)
         self.buttonRRes2.pack(padx=45, side='left')
         self.labelRRes2.pack(padx=30, side='left')
         self.frameRRes2.pack(anchor='w', pady=10)
@@ -135,8 +136,8 @@ class GUI:
         self.frameSpace10.pack(anchor='w', pady=10)
 
         self.frameSRes = Frame(squTab)
-        self.buttonSRes = Button(self.frameSRes, text='Compute')  # command=self.cir
-        self.labelSRes = Label(self.frameSRes, text='Area')
+        self.buttonSRes = Button(self.frameSRes, text='Compute', command=self.compute('5'))
+        self.labelSRes = Label(self.frameSRes)
         self.buttonSRes.pack(padx=45, side='left')
         self.labelSRes.pack(padx=30, side='left')
         self.frameSRes.pack(anchor='w', pady=10)
@@ -160,8 +161,8 @@ class GUI:
         self.frameSpace13.pack(anchor='w', pady=10)
 
         self.frameSRes2 = Frame(squTab)
-        self.buttonSRes2 = Button(self.frameSRes2, text='Compute')  # command=self.cir
-        self.labelSRes2 = Label(self.frameSRes2, text='Area')
+        self.buttonSRes2 = Button(self.frameSRes2, text='Compute', command=self.compute(6))
+        self.labelSRes2 = Label(self.frameSRes2)
         self.buttonSRes2.pack(padx=45, side='left')
         self.labelSRes2.pack(padx=30, side='left')
         self.frameSRes2.pack(anchor='w', pady=10)
@@ -185,8 +186,8 @@ class GUI:
         self.frameTSides.pack(anchor='w', pady=10)
 
         self.frameTRes = Frame(triTab)
-        self.buttonTRes = Button(self.frameTRes, text='Compute')  # command=self.cir
-        self.labelTRes = Label(self.frameTRes, text='Area')
+        self.buttonTRes = Button(self.frameTRes, text='Compute', command=self.compute(7))
+        self.labelTRes = Label(self.frameTRes)
         self.buttonTRes.pack(padx=45, side='left')
         self.labelTRes.pack(padx=30, side='left')
         self.frameTRes.pack(anchor='w', pady=10)
@@ -202,16 +203,59 @@ class GUI:
 
         self.frameTSides2 = Frame(triTab)
         self.labelTSides2 = Label(self.frameTSides2, text='Enter Sides:')
-        self.entryTSides3 = Entry(self.frameTSides2)
-        self.entryTSides4 = Entry(self.frameTSides2)
+        self.entryTSides3 = Entry(self.frameTSides2, width=12)
+        self.entryTSides4 = Entry(self.frameTSides2, width=12)
+        self.entryTSides5 = Entry(self.frameTSides2, width=12)
         self.labelTSides2.pack(padx=5, side='left')
         self.entryTSides3.pack(padx=5, side='left')
         self.entryTSides4.pack(padx=5, side='left')
+        self.entryTSides5.pack(padx=5, side='left')
         self.frameTSides2.pack(anchor='w', pady=10)
 
         self.frameTRes2 = Frame(triTab)
-        self.buttonTRes2 = Button(self.frameTRes2, text='Compute')  # command=self.cir
+        self.buttonTRes2 = Button(self.frameTRes2, text='Compute', command=self.compute(8))
         self.labelTRes2 = Label(self.frameTRes2, text='Area')
         self.buttonTRes2.pack(padx=45, side='left')
         self.labelTRes2.pack(padx=30, side='left')
         self.frameTRes2.pack(anchor='w', pady=10)
+
+    def compute(self, num: int):
+
+        try:
+            rad = self.entryCRad.get()
+            r1 = self.entryRSides.get()
+            r2 = self.entryRSides2.get()
+            sq = self.entrySSide.get()
+            t1 = self.entryTSides.get()
+            t2 = self.entryTSides2.get()
+            radp = self.entryCRad2.get()
+            rs1 = self.entryRSides3.get()
+            rs2 = self.entryRSides4.get()
+            sqp = self.entrySSide2.get()
+            tp1 = self.entryTSides3.get()
+            tp2 = self.entryTSides4.get()
+            tp3 = self.entryTSides5.get()
+
+            if num == 1:
+                self.labelCRes.config(text=f'The area of the circle is {area.cir(float(rad))}')
+            elif num == 2:
+                self.labelCRes2.config(text=f'The perimeter of the circle is {perimeter.circle(float(radp))}')
+            elif num == 3:
+                self.labelRRes.config(text=f'The area of the rectangle is {area.rec(float(r1), float(r2))}')
+            elif num == 4:
+                self.labelRRes2.config(text=f'The perimeter of the rectangle is {perimeter.rectangle(float(rs1), float(rs2))}')
+            elif num == 5:
+                self.labelSRes.config(text=f'The area of the square is {area.squ(float(sq))}')
+            elif num == 6:
+                self.labelSRes2.config(text=f'The perimeter of the square is {perimeter.square(float(sqp))}')
+            elif num == 7:
+                self.labelTRes.config(text=f'The area of the triangle is {area.tri(float(t1), float(t2))}')
+            else:
+                self.labelTRes2.config(text=f'The perimeter of the triangle is {perimeter.triangle(float(tp1), float(tp2), float(tp3))}')
+
+        except ValueError:
+            self.labelCir.config(text='Enter numeric values')
+        except:
+            self.labelCRad.config(text='Error occurred!')
+
+
